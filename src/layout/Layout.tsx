@@ -4,9 +4,9 @@ import Footer from "./Footer";
 
 function Layout() {
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col  bg-gray-100 ">
       <Header />
-      <main className="lg:container mx-auto">
+      <main className="">
         <Outlet />
       </main>
       <Footer />

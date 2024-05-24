@@ -4,7 +4,7 @@ import { FaTwitter } from "react-icons/fa";
 function Footer() {
   return (
     <div className="relative">
-          <div className="bg-blue-300 absolute top-0 py-6 px-8  items-center">
+          <div className="bg-blue-300 absolute bottom-0 py-6 px-8  items-center">
       <ul className="flex gap-4 justify-center  py-2 text-white">
         <li className="cursor-pointer text-3xl text-black">
           <FaInstagram />

@@ -25,14 +25,14 @@ function CardItem({ book }: { book: BookType }) {
     navigate(`/book/${id}`);
   };
   return (
-    <Card maxW="sm">
-      <CardBody>
-        <Image src={book.imageURL} alt={book.name} borderRadius="lg" />
+    <Card width={"400px"} className="shadow-2xl shadow-black bg-white">
+      <CardBody className="flex flex-col justify-center items-center  truncate">
+        <Image src={book.imageURL} alt={book.name} borderRadius="lg" width={"150px"} height={"200px"}/>
         <Stack mt="6" spacing="3">
           <Heading size="md">{book.name}</Heading>
           <Text>{book.detail}</Text>
           <Text color="blue.600" fontSize="2xl">
-            {book.price}ریال
+           قیمت: {book.price  } ریال  
           </Text>
         </Stack>
       </CardBody>
