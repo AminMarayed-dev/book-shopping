@@ -42,5 +42,19 @@
       "detail": "این کتاب راجب ریدینگ زبان است",
       "price": 6000
     }
+  ],
+  "users": [
+    {
+      "id": 1717074388094,
+      "username": "Vpjackie",
+      "email": "aminmarayed4@gmail.com",
+      "password": "4234234234"
+    },
+    {
+      "id": 1717074491966,
+      "username": "Vpjackie",
+      "email": "aminmarayed1@gmail.com",
+      "password": "6456456456456"
+    }
   ]
 }

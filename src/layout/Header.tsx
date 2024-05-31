@@ -22,6 +22,9 @@ function Header() {
           <li className="cursor-pointer">
             <Link to={"/contact"}>{localization.contact}</Link>
           </li>
+          <li>
+          <Link to={"/login"}>{localization.login}</Link>
+          </li>
         </ul>
       
       </nav>
