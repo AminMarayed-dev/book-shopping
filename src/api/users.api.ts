@@ -9,5 +9,10 @@ type User = {
 
 export async function postUsers(user:User) {
   const response = await api.post<User>("/users", user);
-  return response.data;
+  return response;
+}
+
+export async function getUserByFilter({email, password}) {
+  const response = await api.get(`/users?email=${email}&password=${password}`);
+  return response;
 }

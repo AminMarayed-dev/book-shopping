@@ -3,34 +3,37 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: IRANSansWeb;
-    src: url("./assets/font/IRANSans\(FaNum\).ttf");
+  font-family: IRANSansWeb;
+  src: url("./assets/font/IRANSans\(FaNum\).ttf");
 }
-body{
-    font-family: IRANSansWeb;
+body {
+  font-family: IRANSansWeb;
 }
-
 
 .swiper {
-    width: 100%;
-    height: 300px;
-  }
-  
-  .swiper-slide {
-    text-align: center;
-    font-size: 18px;
-    background: #fff;
-  
-    /* Center slide text vertically */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .swiper-slide img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
+  width: 100%;
+  height: 300px;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.toastBody {
+  font-size: 1rem;
+  text-align: center;
+}

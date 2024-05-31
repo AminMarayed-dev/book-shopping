@@ -1,68 +1,37 @@
-// import { Box, Button, Paper, TextField } from "@mui/material";
-
-// function Login() {
-//   return (
-//     <Box
-//       sx={{ display: "flex", flexDirection: "column", p: "1rem" }}
-//       component={Paper}
-//     >
-//       <TextField id="outlined-basic" label="نام کاربری" variant="outlined" />
-//       <TextField id="outlined-basic" label="رمز عبور" variant="outlined" />
-//       <Button variant="contained">ورود</Button>
-//     </Box>
-//   );
-// }
-
-// export default Login;
-
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-// import FormControlLabel from "@mui/material/FormControlLabel";
-// import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { postUsers } from "../../api/users.api";
-import { LegendToggleTwoTone } from "@mui/icons-material";
-
-// function Copyright(props: any) {
-//   return (
-//     <Typography
-//       variant="body2"
-//       color="text.secondary"
-//       align="center"
-//       {...props}
-//     >
-//       {"Copyright © "}
-//       <Link color="inherit" href="https://mui.com/">
-//         Your Website
-//       </Link>{" "}
-//       {new Date().getFullYear()}
-//       {"."}
-//     </Typography>
-//   );
-// }
+import { getUserByFilter, getUsers, postUsers } from "../../api/users.api";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom";
+// import { LoadingButton } from '@mui/lab';
 
 export default function SignIn() {
   // mode = 1 => sign in & mode = 2 => sign up
   const [mode, setMode] = React.useState(1);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const navigate = useNavigate();
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
+  // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
+  //   const data = new FormData(event.currentTarget);
+  //   console.log({
+  //     email: data.get("email"),
+  //     password: data.get("password"),
+  //   });
+    
+  // };
 
-  const handleSignUp =  (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSignUp = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const { username, email, password } = event.target;
     if (username.value && email.value && password.value) {
@@ -72,11 +41,47 @@ export default function SignIn() {
         email: email.value,
         password: password.value,
       };
-      postUsers(newUser).then((res) => console.log(res));
+      setIsLoading(true);
+      postUsers(newUser).then((res) => {
+        if (res.status === 201) {
+          localStorage.setItem("isLogin", JSON.stringify(true));
+          toast.success("اطلاعات کاربر با موفقیت افزوده شد", {
+            position: "top-right",
+            autoClose: 3000,
+            theme: "colored",
+            });
+          navigate('/')
+          
+        }
+      });
     } else {
-      alert("please write empty field form");
+      toast.error('ثبت نام ناموفق بود')
     }
+    setIsLoading(false)
   };
+
+  const handleSignIn = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const {  email, password } = event.target;
+    getUserByFilter({email:email.value, password:password.value}).then((res) => {
+      try {
+        if(res.data.length === 1) {
+          localStorage.setItem("isLogin", JSON.stringify(true));
+          toast.success("ورود شما با موفقیت انجام شد", {
+            position: "top-right",
+            autoClose: 3000,
+            theme: "colored",
+            });
+          navigate('/')
+        }
+        else{
+          toast.error("ایمیل یا رمز عبور نادرست است")
+        }
+      } catch (error) {
+        toast.error("مشکل پیش اومده راشد")
+      }
+    })
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -98,7 +103,7 @@ export default function SignIn() {
         {mode === 1 ? (
           <Box
             component="form"
-            onSubmit={handleSubmit}
+            onSubmit={handleSignIn}
             noValidate
             sx={{ mt: 1 }}
           >

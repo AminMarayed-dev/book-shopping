@@ -7,6 +7,7 @@ import Book from "../pages/book/[id]/Book";
 import Login from "../pages/login/Login";
 import ThemeContextProvider from "../context/ThemeContextProvider";
 import { CssBaseline } from "@mui/material";
+import Basket from "../pages/basket/Basket";
 
 export const router = createBrowserRouter([
   {
@@ -37,6 +38,15 @@ export const router = createBrowserRouter([
       <ThemeContextProvider>
         <CssBaseline/>
         <Login />
+      </ThemeContextProvider>
+    ),
+  },
+  {
+    path: "/basket",
+    element: (
+      <ThemeContextProvider>
+        <CssBaseline/>
+        <Basket />
       </ThemeContextProvider>
     ),
   },

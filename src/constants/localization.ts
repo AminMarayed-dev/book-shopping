@@ -2,7 +2,9 @@ export const localization = {
     home:"خانه",
     about: "درباره ما",
     contact: "تماس با ما",
-    login:"ورود"
+    login:"ورود",
+    basket:"سبد خرید",
+    logout:"خروج"
 }
 
 export const pageLevelLocalization = {
