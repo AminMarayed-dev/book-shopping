@@ -21,15 +21,6 @@ export default function SignIn() {
   const [isLoading, setIsLoading] = React.useState(false);
   const navigate = useNavigate();
 
-  // const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  //   const data = new FormData(event.currentTarget);
-  //   console.log({
-  //     email: data.get("email"),
-  //     password: data.get("password"),
-  //   });
-    
-  // };
 
   const handleSignUp = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -40,6 +31,8 @@ export default function SignIn() {
         username: username.value,
         email: email.value,
         password: password.value,
+        role: "user",
+
       };
       setIsLoading(true);
       postUsers(newUser).then((res) => {
@@ -67,6 +60,12 @@ export default function SignIn() {
       try {
         if(res.data.length === 1) {
           localStorage.setItem("isLogin", JSON.stringify(true));
+console.log(res.data)
+          if(res.data[0].role === "admin"){
+            console.log("ostad")
+
+            localStorage.setItem("isAdmin", JSON.stringify(true));
+          }
           toast.success("ورود شما با موفقیت انجام شد", {
             position: "top-right",
             autoClose: 3000,

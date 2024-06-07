@@ -3,7 +3,10 @@ import { localization } from "../constants/localization";
 import { FiBook } from "react-icons/fi";
 
 function Header() {
+
   const isLogin = JSON.parse(localStorage.getItem("isLogin"));
+  const isAdmin = JSON.parse(localStorage.getItem("isAdmin"));
+  
   const navigate = useNavigate();
   return (
     <div className="flex bg-gradient-to-r to-sky-700 from-indigo-300 justify-between md:flex-row-reverse flex-col items-center px-8 whitespace-nowrap">
@@ -33,12 +36,17 @@ function Header() {
             <Link to={`${isLogin ? "/basket" : "/login"}`}>
               {isLogin ? localization.basket : localization.login}
             </Link>
+          </li>{" "}
+          <li>
+            <Link to={`${isAdmin ? "/dashboard" : ""}`}>
+              {isAdmin ? localization.dashboard : ""}
+            </Link>
           </li>
           <li>
             <button
               onClick={() => {
                 localStorage.setItem("isLogin", JSON.stringify(false));
-                navigate('/login');
+                navigate("/login");
               }}
             >
               {localization.logout}
